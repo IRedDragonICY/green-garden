@@ -2,7 +2,7 @@ name: Watering the plants on GitHub
 
 on:
   schedule:
-    - cron: '* * * * *'
+    - cron: '*/20 * * * *'
   workflow_dispatch:
 
 jobs:
