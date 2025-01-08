@@ -11,17 +11,18 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout plant
+        run: |
+          git clone https://github.com/$GITHUB_REPOSITORY.git .
+          git config --global user.name "${{ secrets.GIT_USERNAME }}"
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
 
       - name: Water and commit
         run: |
           date_now=$(date '+%Y-%m-%d %H:%M:%S')
           echo "🌱 Plant watered: $date_now" >> 🌱.txt
 
-          git config user.name "${{ secrets.GIT_USERNAME }}"
-          git config user.email "${{ secrets.GIT_EMAIL }}"
-
           git add 🌱.txt
           git commit -m "🌿 Plant watered: $date_now"
           git pull origin main --rebase 
-          git push origin main        
+          git push origin main
